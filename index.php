@@ -22,7 +22,7 @@ try {
             vote($userId,$answerA,$answerB); 
         } 
     } else {
-        require('./view/register.php');
+        require('view/register.php');
     }    
 }
 catch(PDOException $e) {
