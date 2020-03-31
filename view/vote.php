@@ -11,8 +11,8 @@
             <form method="POST" action="index.php">
                 <input type="hidden" name="action" value="vote"/>
                 <input type="hidden" name="userId" value=<?= $_COOKIE['userId']?> />
-                <input type="submit" name="a" value="A" id="aBtn"/>
-                <input type="submit" name="b" value="B" id="bBtn"/>
+                <input type="submit" name="a" value="a" id="aBtn"/>
+                <input type="submit" name="b" value="b" id="bBtn"/>
             </form>
         </div>
     </body>
