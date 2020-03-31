@@ -20,6 +20,5 @@
             </form>
         </div>
     </body>
-    <script src="public/js/register.js"></script>
 </html>
 
