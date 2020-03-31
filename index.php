@@ -19,7 +19,7 @@ try {
             vote();
         } 
     } else {
-        require('./view/register.php');
+        require('view/register.php');
     }    
 }
     catch(PDOException $e) {
