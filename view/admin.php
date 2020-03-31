@@ -11,8 +11,9 @@
         <div id="adminMainWrapper">
             <?php include("results.php"); ?>
             <form id='resetForm' action= 'index.php' method='post'>
-            <input type="hidden" name="action" value="newQuestion"/>
+                <input type="hidden" name="action" value="newQuestion"/>
                 <input type="submit" id="resetButton" value='reset'/>
+            </form>   
         </div>
     </body>
     <script src="public/js/admin.js"></script>

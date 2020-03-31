@@ -41,11 +41,23 @@ function admin() {
 
 
     function newQuestion() {
-        $qManager = new Manager;
+        $qManager = new Manager();
         $madeQ = $qManager->doesQExist();
         if(!$madeQ){
             $makeQ = $qManager->makeQuestion();
             echo $makeQ;
+        } else {
+            $tally = $qManager->tallyVotes($madeQ['id']);
+            $openPolls = $qManager->pollsOpen($madeQ['id']);
+            foreach($tally as $vote){
+                if ($vote == 'a'){
+                    $voteValue = 'green';
+                } else if ($vote == 'b'){
+                    $voteValue = 'red';
+                }
+                $ballotBox = $qManager->enterTally($madeQ['id'],$voteValue);
+            }
+            $newQ = $qManager->makeQuestion();
         }
         require("view/admin.php");
     }
