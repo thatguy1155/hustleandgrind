@@ -10,7 +10,11 @@ try {
         if ($action === 'admin') {
             admin(); 
         } else if ($action === 'vote') {
-            vote(); 
+            $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
+            $questionId = isset($_POST['userId']) ? $_POST['userId'] : ''
+            $answerA = isset($_POST['a']) ? $_POST['a'] : '';
+            $answerB = isset($_POST['b']) ? $_POST['b'] : '';
+            vote($userId,$questionId,$answerA,$answerB); 
         } else {
             login();
         }
