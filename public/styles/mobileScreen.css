@@ -1,0 +1,27 @@
+/* register */
+
+body {
+    margin: 0;
+    height: 100vh;
+    width: auto;
+}
+
+#registerFormWrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#registerFormWrapper form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    font-size: 1.5em;
+}
+
+#registerFormWrapper input[type="text"] {
+    font-size: 0.8em;
+}
+
+/* end of register */
