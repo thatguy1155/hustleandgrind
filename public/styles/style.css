@@ -8,12 +8,13 @@ body {
     align-items: center;
     justify-content: center;
 }
-form {
+#voteForm {
     flex-direction: column;
     height: 90vh;
     width: 100%;
 }
-input[type=submit] {
+#aBtn input[type=submit],
+#bBtn input[type=submit] {
     height: 30%;
     width: 70%;
     margin: 5%;
