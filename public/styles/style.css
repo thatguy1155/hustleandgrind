@@ -1,0 +1,30 @@
+body {
+    height: 99vh;
+    margin: auto;
+    width: 65%;
+}
+#buttons, form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form {
+    flex-direction: column;
+    height: 90vh;
+    width: 100%;
+}
+input[type=submit] {
+    height: 30%;
+    width: 70%;
+    margin: 5%;
+    border: none;
+    border-radius: 10px;
+    font-size: 5em;
+    color: white;
+}
+#aBtn {
+    background-color: blue;
+}
+#bBtn {
+    background-color: red;
+}
