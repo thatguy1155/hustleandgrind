@@ -1,5 +1,5 @@
 <?php
-
+require_once("./model/Manager.php");
 
 
 
@@ -12,7 +12,7 @@ function vote($userId,$questionId,$answerA,$answerB) {
     $voteManager = new Manager();
 
     if ($answerA OR $answerB) {
-        setcookie('hasVoted', $userId, time()+7*24*3600, null, null, false, true);
+        setcookie('hasVoted', 'true', time()+7*24*3600, null, null, false, true);
         if ($answerA) {
             $votes = $voteManager->insertVote($userId,$answerA);
             // $votes = $voteManager->insertVote($userId,$questionId,$answerA);

@@ -1,6 +1,6 @@
 <?php
 
-require("./controller.php");
+require("./controller/controller.php");
 /**
  * TODO: verify cookies, if cookies set, showAllPlaylists, if not showLandingPage
  */
