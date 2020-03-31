@@ -10,14 +10,18 @@ try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
     if (isset($_REQUEST['action'])) {
         if ($action === 'admin') {
-            admin(); 
+            $round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
+            admin();
+             
         } else if ($action === 'register') {
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             register($name, $email);
         } else if ($action === 'vote') {
             vote();
-        } 
+        } else if ($action === 'newQuestion') {
+            newQuestion();
+        }
     } else {
         require('./view/register.php');
     }    

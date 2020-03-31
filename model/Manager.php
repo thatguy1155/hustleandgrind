@@ -38,4 +38,28 @@ class Manager {
         }
         $addUser->closeCursor(); 
     }
+
+
+
+
+
+    //-----------question functions---------------
+    function doesQExist(){
+        $qExists = $this->_db->prepare("SELECT id FROM questions");
+        $resp = $qExists->execute();
+        if(!$resp) {
+            throw new PDOException('Unable to retrieve user ID');
+        }
+        return $qExists->fetch();
+    }
+
+    function makeQuestion(){      
+        $addQ = $this->_db->prepare("INSERT INTO questions(green,red) VALUES(NULL, NULL)");
+        $status = $addQ->execute();
+        if (!$status) {
+            throw new PDOException('Impossible to add the question!');
+        }
+        return "question made";
+        $addQ->closeCursor();
+    }
 }

@@ -21,4 +21,14 @@
         require("view/admin.php");   //change to page 3 page name
     }
 
+    function newQuestion() {
+        $qManager = new Manager;
+        $madeQ = $qManager->doesQExist();
+        if(!$madeQ){
+            $makeQ = $qManager->makeQuestion();
+            echo $makeQ;
+        }
+        require("view/admin.php");
+    }
+
 
