@@ -8,17 +8,17 @@ function login() {
     }
 
 
-function vote($userId,$questionId,$answerA,$answerB) {
-    $voteManager = new Manager();
+function vote($userId,$answerA,$answerB) {
+    $manager = new Manager();
+
+    $questionId = $manager->getQuestion();
 
     if ($answerA OR $answerB) {
-        setcookie('hasVoted', 'true', time()+7*24*3600, null, null, false, true);
+        setcookie('hasVoted', $questionId['id'], time()+3*24*3600, null, null, false, true);
         if ($answerA) {
-            $votes = $voteManager->insertVote($userId,$answerA);
-            // $votes = $voteManager->insertVote($userId,$questionId,$answerA);
+            $votes = $manager->insertVote($userId,$questionId['id'],$answerA);
         } elseif ($answerB) {
-            $votes = $voteManager->insertVote($userId,$answerB);
-            // $votes = $voteManager->insertVote($userId,$questionId,$answerB);
+            $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
         }
         require("view/vote.php");
     }

@@ -11,10 +11,9 @@ try {
             admin(); 
         } else if ($action === 'vote') {
             $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
-            $questionId = isset($_POST['userId']) ? $_POST['userId'] : '';
             $answerA = isset($_POST['a']) ? $_POST['a'] : '';
             $answerB = isset($_POST['b']) ? $_POST['b'] : '';
-            vote($userId,$questionId,$answerA,$answerB); 
+            vote($userId,$answerA,$answerB); 
         } else {
             login();
         }
