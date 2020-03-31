@@ -1,21 +1,26 @@
 <?php
+// $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
+// if ($cookieUserId) {
+//     require('view/vote.php');
+// }
 
-require("./controller.php");
-/**
- * TODO: verify cookies, if cookies set, showAllPlaylists, if not showLandingPage
- */
+require("controller/controller.php");
+
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
     if (isset($_REQUEST['action'])) {
         if ($action === 'admin') {
             admin(); 
+        } else if ($action === 'register') {
+            $name = isset($_POST['name']) ? $_POST['name'] : '';
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            register($name, $email);
         } else if ($action === 'vote') {
-            vote(); 
-        } else {
-            login();
-        }
-    }
-        
+            vote();
+        } 
+    } else {
+        require('./view/register.php');
+    }    
 }
     catch(PDOException $e) {
         $msg = $e->getMessage();
