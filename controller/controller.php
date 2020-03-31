@@ -20,9 +20,9 @@ function vote($userId,$questionId,$answerA,$answerB) {
             $votes = $voteManager->insertVote($userId,$answerB);
             // $votes = $voteManager->insertVote($userId,$questionId,$answerB);
         }
-        
         require("view/vote.php");
     }
+    require("view/vote.php");
 }
 
 function admin() {
