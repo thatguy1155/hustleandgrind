@@ -8,8 +8,7 @@
     </head> 
     <body>
         <div id="buttons">
-            <form method="POST" action="../index.php" id="voteForm">
-                <input type="hidden" name="voted" value="true"/>
+            <form method="POST" action="index.php" id="voteForm">
                 <input type="hidden" name="action" value="vote"/>
                 <input type="hidden" name="userId" value=<?= $_COOKIE['userId']?> />
                 <input type="submit" name="a" value="a" id="aBtn"/>
