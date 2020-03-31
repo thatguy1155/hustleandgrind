@@ -15,10 +15,11 @@ class Manager {
     }
 
     public function insertVote($userId,$answer) {       
-    // public function insertVote($userId,$questionId,$answer) {       
+    // public function insertVote($userId,$questionId,$answer) {
+        // $insertVote = $this->_db->prepare("INSERT INTO members(userId, vote) VALUES(:userId, :answer)");     
         $insertVote = $this->_db->prepare("INSERT INTO members(userId, questionId, vote) VALUES(:userId, :questionId, :answer)");
         $insertVote->bindParam(':userId',$userId,PDO::PARAM_STR);
-        $insertVote->bindParam(':questionId',$username,PDO::PARAM_STR);
+        // $insertVote->bindParam(':questionId',$username,PDO::PARAM_STR);
         $insertVote->bindParam(':answer',$answer,PDO::PARAM_STR);
         $status = $insertVote->execute();
         if (!$status) {
