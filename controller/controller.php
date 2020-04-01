@@ -17,7 +17,7 @@
                 }
             }
 
-            header("Location: index.php");
+            header("Location:index.php");
               
               
         } else if ($emptyFields) {
@@ -40,7 +40,7 @@
                 $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
             }
         }
-        require("view/vote.php");
+        header("Location:index.php");
     }
 
     function admin() {
@@ -68,7 +68,7 @@
             }
             $newQ = $qManager->makeQuestion();
         }
-        require("view/admin.php");
+        header('Location:index.php?action=admin');
     }
 
     function display() {
@@ -83,11 +83,7 @@
                 $finalVoteCount['b'] += 1;
             }
         }
-        
         echo json_encode($finalVoteCount);
-        
-
-        
     }
 
 
