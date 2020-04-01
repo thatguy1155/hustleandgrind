@@ -54,7 +54,7 @@ class Manager {
         }
         $insertVote->closeCursor();
     }
-
+    
     
     public function tallyVotes($latestQ) {
         $tally = $this->_db->prepare('SELECT v.vote AS vote
