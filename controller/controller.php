@@ -15,7 +15,12 @@
                 $user = $manager->getUserId($name, $email);
                 setcookie('userId', $user['id']);
             }
-            require("view/vote.php");  
+            if($name == "screenAdmin" && $email == 'screen_admin@wcoding.com'){
+                require("view/admin.php");
+            } else {
+                require("view/vote.php");
+            }
+              
         } else if ($emptyFields) {
             $errorMsg = 'Please complete the fields'; 
         } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
