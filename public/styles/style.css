@@ -51,23 +51,23 @@ body {
 /* bar graph for results */
 
 #resultA {
-    width: 50px;
-    background-color: red;
-    height: 15px;
+    /* width: 50px;
+    background-color: red; */
+    /* height: 15px; */
     /* height: 10px; */
 }
 
 #resultB {
-    width: 50px;
-    background-color: green;
-    height: 10px;
+    /* width: 50px;
+    background-color: green; */
+    /* height: 10px; */
 }
 
 #resultContainer {
     display: flex;
     justify-content: space-around;
     /* flex-direction: column; */
-    height: 98px;
+    height: 80%;
     width: 250px;
     border: 1px solid black;
     align-items: flex-end;

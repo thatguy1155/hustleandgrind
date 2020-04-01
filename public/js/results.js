@@ -1,33 +1,38 @@
 // get query selector for the hidden inputs
 // set attribute of height for the resultA and B
 
-const valueA = document.querySelector('#heightA');
-const valueB = document.querySelector('#heightB');
+// const valueA = document.querySelector('#heightA');
+// const valueB = document.querySelector('#heightB');
 
-console.log(valueA.value);
-console.log(valueB.value);
+// console.log(valueA.value);
+// console.log(valueB.value);
 
-document.getElementById('resultA').setAttribute("height", valueA.value);
-document.getElementById('resultB').setAttribute("height", valueB.value);
+
 // AJAX BELOW
 var searchBox = document.getElementById('search');
 var button = document.getElementById('do');
 //grab elements for the textbox and the div that will ultimately host the results
 
+let aResults = document.getElementById('resultA');
+let bResults = document.getElementById('resultB');
 
 
-button.addEventListener('click', function() {
-    console.log('works here');
+// button.addEventListener('click', function() {
+//     console.log('works here');
 
-    // run ajax request to backend w the contents of the text box
+// run ajax request to backend w the contents of the text box
+function results() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://localhost/Git/Project_wcoding/hustleandgrind/index.php?action=display&xml=1`);
+    xhr.open('GET', `http://localhost/project/hustleandgrind/index.php?action=display&xml=1`);
 
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             obj = JSON.parse(xhr.response);
-            console.log(obj);
+            let aCount = (obj['a']);
+            let bCount = (obj['b']);
 
+            aResults.innerHTML = `${aCount}`;
+            bResults.innerHTML = `${bCount}`;
 
         } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200 & xhr.status === 0) {
 
@@ -38,4 +43,8 @@ button.addEventListener('click', function() {
     });
     xhr.send(null);
 
-});
+};
+
+setInterval(function() {
+    results();
+}, 5000);
