@@ -1,6 +1,9 @@
 <?php
 $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
-if ($cookieUserId) {
+$cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
+if ($cookieAdminId) {
+    require('view/admin.php');
+} else if ($cookieUserId) {
     require('view/vote.php');
 }
 
@@ -10,7 +13,7 @@ try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
     if (isset($_REQUEST['action'])) {
         if ($action === 'admin') {
-            $round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
+            //$round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
             admin();
              
         } else if ($action === 'register') {
