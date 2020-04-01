@@ -15,7 +15,7 @@ class Manager {
     }
   
     public function getUserId($name, $email) {
-          $user = $this->_db->prepare("SELECT id FROM users WHERE name = :name AND email = :email");
+          $user = $this->_db->prepare("SELECT id,isAdmin FROM users WHERE name = :name AND email = :email");
           $user->bindParam(':name', $name, PDO::PARAM_STR);
           $user->bindParam(':email', $email, PDO::PARAM_STR);
           $resp = $user->execute();
@@ -43,7 +43,6 @@ class Manager {
 
 
     public function insertVote($userId,$questionId,$answer) {
-        // $insertVote = $this->_db->prepare("INSERT INTO users(userId, vote) VALUES(:userId, :answer)");     
         $insertVote = $this->_db->prepare("INSERT INTO users(userId, questionId, vote) VALUES(:userId, :questionId, :answer)");
         $insertVote->bindParam(':userId',$userId,PDO::PARAM_STR);
         $insertVote->bindParam(':questionId',$username,PDO::PARAM_STR);
@@ -112,6 +111,8 @@ class Manager {
             throw new PDOException('Impossible to get question ID');
         }
         $getQuestion->closeCursor();
+
+        return $getQuestion->fetch();
     }
 
 

@@ -1,35 +1,40 @@
 <?php
     require_once("./model/Manager.php");
 
-    function login() {
-        require("view/login.php");  //change to pg 1 page name
-    }
-
     function register($name, $email) {
         $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
         $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
         $manager = new Manager();   
-        $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;    
-        if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email)) {
-            if (!$cookieUserId && !$cookieAdminId) {
-                $addUser = $manager->addUser($name, $email);
-                $user = $manager->getUserId($name, $email);
-                if($name == "screenAdmin" && $email == 'screen_admin@wcoding.com'){
-                    setcookie('adminId', $user['id']);
-                } else{
-                    setcookie('userId', $user['id']);
+        $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;
+        $userExists = $manager->getUserId($name, $email);
+        if($userExists){
+            if($cookieUserId||$cookieAdminId){
+                header("Location:index.php");
+            } else {
+                if($userExists['isAdmin']){
+                    setcookie('adminId', $userExists['id']);
+                    header("Location:index.php");
+                } else {
+                    setcookie('userId', $userExists['id']);
+                    header("Location:index.php");
                 }
             }
-
-            header("Location: index.php");
-              
-              
-        } else if ($emptyFields) {
-            $errorMsg = 'Please complete the fields'; 
-        } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
-            $errorMsg = 'Please enter a correct email address';
-        }
-        require("view/register.php");
+        } else {
+            if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email)) {
+                if (!$cookieUserId && !$cookieAdminId) {
+                    $addUser = $manager->addUser($name, $email);
+                    $user = $manager->getUserId($name, $email);
+                    setcookie('userId', $user['id']);
+                }
+                header("Location:index.php");     
+            } else if ($emptyFields) {
+                $errorMsg = 'Please complete the fields'; 
+            } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
+                $errorMsg = 'Please enter a correct email address';
+            }
+            require("view/register.php");
+        } 
+        
     }
 
     function vote($userId,$answerA,$answerB) {
@@ -44,7 +49,6 @@
             } elseif ($answerB) {
                 $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
             }
-            require("view/vote.php");
         }
         require("view/vote.php");
     }
@@ -74,7 +78,8 @@
             }
             $newQ = $qManager->makeQuestion();
         }
-        header("Location: index.php?action=admin");
+        
+        header('Location:index.php?action=admin');
     }
 
     function display() {
@@ -89,11 +94,7 @@
                 $finalVoteCount['b'] += 1;
             }
         }
-        
         echo json_encode($finalVoteCount);
-        
-
-        
     }
 
 

@@ -12,4 +12,3 @@
 
 <script src="../public/js/results.js"></script>
 
-<button id="do">do shit</button>
