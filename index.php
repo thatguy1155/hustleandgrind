@@ -1,7 +1,7 @@
 <?php
 $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
 if ($cookieUserId) {
-    require('view/vote.php');
+    header('Location: view/vote.php');
 }
 
 require("./controller/controller.php");
