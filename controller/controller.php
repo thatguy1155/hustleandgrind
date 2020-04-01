@@ -1,10 +1,6 @@
 <?php
     require_once("./model/Manager.php");
 
-    function login() {
-        require("view/login.php");  //change to pg 1 page name
-    }
-
     function register($name, $email) {
         $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
         $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
@@ -21,7 +17,7 @@
                 }
             }
 
-            header("Location: index.php");
+            header("Location:index.php");
               
               
         } else if ($emptyFields) {
@@ -44,7 +40,6 @@
             } elseif ($answerB) {
                 $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
             }
-            require("view/vote.php");
         }
         require("view/vote.php");
     }
@@ -74,7 +69,7 @@
             }
             $newQ = $qManager->makeQuestion();
         }
-        require("view/admin.php");
+        header('Location:index.php?action=admin');
     }
 
     function display() {
@@ -89,11 +84,7 @@
                 $finalVoteCount['b'] += 1;
             }
         }
-        
         echo json_encode($finalVoteCount);
-        
-
-        
     }
 
 
