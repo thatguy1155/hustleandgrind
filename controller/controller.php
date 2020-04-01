@@ -77,4 +77,23 @@
         require("view/admin.php");
     }
 
+    function display() {
+        $displayManager = new Manager();
+        $latestQ=$displayManager->doesQExist();
+        $tallyDisplay = $displayManager->tallyVotes($latestQ['id']);
+        $finalVoteCount = ['a' => 0,'b' => 0];
+        foreach($tallyDisplay as $vote){
+            if ($vote == 'a'){
+                $finalVoteCount['a'] += 1;
+            } else if ($vote == 'b'){
+                $finalVoteCount['b'] += 1;
+            }
+        }
+        
+        echo json_encode($finalVoteCount);
+        
+
+        
+    }
+
 
