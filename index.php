@@ -10,7 +10,9 @@ try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
     if (isset($_REQUEST['action'])) {
         if ($action === 'admin') {
-            admin(); 
+            $round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
+            admin();
+             
         } else if ($action === 'register') {
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
@@ -19,8 +21,10 @@ try {
             $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
             $answerA = isset($_POST['a']) ? $_POST['a'] : '';
             $answerB = isset($_POST['b']) ? $_POST['b'] : '';
-            vote($userId,$answerA,$answerB); 
-        } 
+            vote($userId,$answerA,$answerB);
+        } else if ($action === 'newQuestion') {
+            newQuestion();
+        }
     } else {
         require('view/register.php');
     }    
