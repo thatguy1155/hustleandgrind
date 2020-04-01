@@ -15,7 +15,7 @@
                 $user = $manager->getUserId($name, $email);
                 setcookie('userId', $user['id']);
             }
-            require("view/vote.php");  
+            header("Location: view/vote.php");  
         } else if ($emptyFields) {
             $errorMsg = 'Please complete the fields'; 
         } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
