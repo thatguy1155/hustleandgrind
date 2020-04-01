@@ -68,7 +68,7 @@
             }
             $newQ = $qManager->makeQuestion();
         }
-        header('Location:index.php?action=admin');
+        header("Location: index.php?action=admin");
     }
 
     function display() {
