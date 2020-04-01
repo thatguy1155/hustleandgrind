@@ -1,33 +1,33 @@
-
-
-
-
-
 /* admin page css */
-#adminMainWrapper{
-    display:flex;
-    height:100vh;
+
+#adminMainWrapper {
+    display: flex;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
 }
-    
+
 body {
     height: 99vh;
     margin: auto;
     width: 65%;
 }
-#buttons, #voteForm{
+
+#buttons,
+#voteForm {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 #voteForm {
     flex-direction: column;
     height: 90vh;
     width: 100%;
 }
-#aBtn ,
+
+#aBtn,
 #bBtn {
     height: 30%;
     width: 70%;
@@ -38,9 +38,37 @@ body {
     color: white;
     text-transform: uppercase;
 }
+
 #aBtn {
     background-color: blue;
 }
+
 #bBtn {
     background-color: red;
+}
+
+
+/* bar graph for results */
+
+#resultA {
+    width: 50px;
+    background-color: red;
+    height: 15px;
+    /* height: 10px; */
+}
+
+#resultB {
+    width: 50px;
+    background-color: green;
+    height: 10px;
+}
+
+#resultContainer {
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    height: 98px;
+    width: 250px;
+    border: 1px solid black;
+    align-items: flex-end;
 }
