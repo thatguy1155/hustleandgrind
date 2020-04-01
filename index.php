@@ -5,7 +5,7 @@ $xmlRequest = isset($_REQUEST['xml']) ? $_REQUEST['xml'] : '';
 $voted = isset($_POST['voted']) ? $_POST['voted'] : '';
 if(!$xmlRequest && !$voted){
     if ($cookieAdminId) {
-        header('Location: view/admin.php');
+        header('Location: index.php?action=admin&xml=1 ');//make it here that you reroute to index.php?action=admin
     } else if ($cookieUserId) {
         header('Location: view/vote.php');
     }
