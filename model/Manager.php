@@ -33,20 +33,20 @@ class Manager {
         $addUser->bindParam(':email',$email,PDO::PARAM_STR);
         $status = $addUser->execute();
         if (!$status) {
-            throw new PDOException('Impossible to add the member!');
+            throw new PDOException('Unable to add the user');
         }
         $addUser->closeCursor(); 
     }
 
     public function insertVote($userId,$questionId,$answer) {
-        $insertVote = $this->_db->prepare("INSERT INTO members(userId, vote) VALUES(:userId, :answer)");     
-        $insertVote = $this->_db->prepare("INSERT INTO members(userId, questionId, vote) VALUES(:userId, :questionId, :answer)");
+        // $insertVote = $this->_db->prepare("INSERT INTO users(userId, vote) VALUES(:userId, :answer)");     
+        $insertVote = $this->_db->prepare("INSERT INTO users(userId, questionId, vote) VALUES(:userId, :questionId, :answer)");
         $insertVote->bindParam(':userId',$userId,PDO::PARAM_STR);
         $insertVote->bindParam(':questionId',$username,PDO::PARAM_STR);
         $insertVote->bindParam(':answer',$answer,PDO::PARAM_STR);
         $status = $insertVote->execute();
         if (!$status) {
-            throw new PDOException('Impossible to add the vote!');
+            throw new PDOException('Unable to add the vote');
         }
         $insertVote->closeCursor();
     }
@@ -57,7 +57,7 @@ class Manager {
         $getQuestion->bindParam(':answer',$answer,PDO::PARAM_STR);
         $status = $getQuestion->execute();
         if (!$status) {
-            throw new PDOException('Impossible to add the vote!');
+            throw new PDOException('Impossible to get question ID');
         }
         $getQuestion->closeCursor();
     } 
