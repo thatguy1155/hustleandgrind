@@ -2,11 +2,12 @@
 $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
 $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
 $xmlRequest = isset($_REQUEST['xml']) ? $_REQUEST['xml'] : '';
-if(!$xmlRequest){
+$voted = isset($_POST['voted']) ? $_POST['voted'] : '';
+if(!$xmlRequest && !$voted){
     if ($cookieAdminId) {
-        require('view/admin.php');
+        header('Location: view/admin.php');
     } else if ($cookieUserId) {
-        require('view/vote.php');
+        header('Location: view/vote.php');
     }
 }
 
@@ -17,8 +18,7 @@ try {
     if (isset($_REQUEST['action'])) {
         if ($action === 'admin') {
             //$round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
-            admin();
-             
+            admin();     
         } else if ($action === 'register') {
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
