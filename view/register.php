@@ -9,7 +9,8 @@
     </head> 
     <body>
         <div id="registerFormWrapper">
-            <form method="post" action="./index.php">
+            <form method="post" action="./index.php" id="registerForm">
+                <p id="errorMsg"><?= $errorMsg = isset($errorMsg) ? $errorMsg : ''; ?></p>
                 <input type="hidden" name="action" value="register">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
@@ -19,5 +20,6 @@
             </form>
         </div>
     </body>
+    <script src="public/js/register.js"></script>
 </html>
 
