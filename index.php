@@ -2,17 +2,6 @@
 require("./controller/controller.php");
 $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
 $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
-$xmlRequest = isset($_REQUEST['xml']) ? $_REQUEST['xml'] : '';
-$voted = isset($_POST['voted']) ? $_POST['voted'] : '';
-    // if(!$xmlRequest && !$voted){
-    //     if ($cookieAdminId) {
-    //         header('Location: view/admin.php');
-    //     } else if ($cookieUserId) {
-    //         header('Location: view/vote.php');
-    //     }
-    // }
-
-
 
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
