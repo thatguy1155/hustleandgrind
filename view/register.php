@@ -5,21 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register</title>
         <link rel="stylesheet" href="public/styles/style.css"/>
-        <link rel="stylesheet" type="text/css" href="public/styles/mobileScreen.css">
     </head> 
     <body>
-        <div id="registerFormWrapper">
-            <form method="post" action="./index.php" id="registerForm">
-                <p id="errorMsg"><?= $errorMsg = isset($errorMsg) ? $errorMsg : ''; ?></p>
-                <input type="hidden" name="action" value="register">
+        <form method="post" action="index.php" id="regForm">
+            <p id="errorMsg"><?= $errorMsg = isset($errorMsg) ? $errorMsg : ''; ?></p>
+            <input type="hidden" name="action" value="register">
+            <div class="regInputContainer">
+                <input type="text" name="name" id="name" required="">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name">
+            </div>
+            <div class="regInputContainer">		
+                <input type="text" name="email" id="email" required="">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email">
-                <input type="submit" name="register" id="register" value="Register">
-            </form>
-        </div>
+            </div>
+            <input type="submit" name="register" id="register" value="Register">
+        </form>	
     </body>
-    <script src="public/js/register.js"></script>
 </html>
 
