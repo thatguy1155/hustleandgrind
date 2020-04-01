@@ -7,19 +7,21 @@
 
     function register($name, $email) {
         $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
+        $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
         $manager = new Manager();   
         $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;    
         if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email)) {
-            if (!$cookieUserId) {
+            if (!$cookieUserId && !$cookieAdminId) {
                 $addUser = $manager->addUser($name, $email);
                 $user = $manager->getUserId($name, $email);
-                setcookie('userId', $user['id']);
+                if($name == "screenAdmin" && $email == 'screen_admin@wcoding.com'){
+                    setcookie('adminId', $user['id']);
+                } else{
+                    setcookie('userId', $user['id']);
+                }
             }
-            if($name == "screenAdmin" && $email == 'screen_admin@wcoding.com'){
-                header("Location: view/admin.php");
-            } else {
-                header("Location: view/vote.php");
-            }
+
+            header("Location: index.php");
               
               
         } else if ($emptyFields) {
