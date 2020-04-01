@@ -74,7 +74,7 @@
             }
             $newQ = $qManager->makeQuestion();
         }
-        require("view/admin.php");
+        header("Location: index.php?action=admin");
     }
 
     function display() {

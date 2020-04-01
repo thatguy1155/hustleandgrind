@@ -23,6 +23,12 @@ let bResults = document.getElementById('resultB');
 // run ajax request to backend w the contents of the text box
 function results() {
     var xhr = new XMLHttpRequest();
+    //IMPORTANT!!!!_-----------------
+
+    //below is my url vs jeremy's url and mine. you might need to alter this to fit the absolute path that runs in your browser.
+    //please don't delete mine so that I can test!
+    
+    // xhr.open('GET', `http://localhost/Git/Project_wcoding/hustleandgrind/index.php?action=display&xml=1`);
     xhr.open('GET', `http://localhost/project/hustleandgrind/index.php?action=display&xml=1`);
 
     xhr.addEventListener('readystatechange', function() {
