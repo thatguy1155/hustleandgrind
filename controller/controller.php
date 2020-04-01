@@ -16,10 +16,11 @@
                 setcookie('userId', $user['id']);
             }
             if($name == "screenAdmin" && $email == 'screen_admin@wcoding.com'){
-                require("view/admin.php");
+                header("Location: view/admin.php");
             } else {
-                require("view/vote.php");
+                header("Location: view/vote.php");
             }
+              
               
         } else if ($emptyFields) {
             $errorMsg = 'Please complete the fields'; 
