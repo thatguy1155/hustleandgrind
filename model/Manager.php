@@ -15,7 +15,7 @@ class Manager {
     }
   
     public function getUserId($name, $email) {
-          $user = $this->_db->prepare("SELECT id FROM users WHERE name = :name AND email = :email");
+          $user = $this->_db->prepare("SELECT id,isAdmin FROM users WHERE name = :name AND email = :email");
           $user->bindParam(':name', $name, PDO::PARAM_STR);
           $user->bindParam(':email', $email, PDO::PARAM_STR);
           $resp = $user->execute();
