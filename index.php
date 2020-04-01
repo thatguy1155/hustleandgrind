@@ -1,7 +1,14 @@
 <?php
 $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
-if ($cookieUserId) {
-    header('Location: view/vote.php');
+$cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
+$xmlRequest = isset($_REQUEST['xml']) ? $_REQUEST['xml'] : '';
+$voted = isset($_POST['voted']) ? $_POST['voted'] : '';
+if(!$xmlRequest && !$voted){
+    if ($cookieAdminId) {
+        header('Location: view/admin.php');
+    } else if ($cookieUserId) {
+        header('Location: view/vote.php');
+    }
 }
 
 require("./controller/controller.php");
@@ -10,9 +17,8 @@ try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
     if (isset($_REQUEST['action'])) {
         if ($action === 'admin') {
-            $round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
-            admin();
-             
+            //$round = isset($_REQUEST['round']) ? $_REQUEST['round'] : '';
+            admin();     
         } else if ($action === 'register') {
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
@@ -24,6 +30,8 @@ try {
             vote($userId,$answerA,$answerB);
         } else if ($action === 'newQuestion') {
             newQuestion();
+        } else if ($action === 'display') {
+            display();
         }
     } else {
         require('view/register.php');

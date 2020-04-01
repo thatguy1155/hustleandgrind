@@ -7,15 +7,23 @@
 
     function register($name, $email) {
         $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
+        $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
         $manager = new Manager();   
         $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;    
         if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email)) {
-            if (!$cookieUserId) {
+            if (!$cookieUserId && !$cookieAdminId) {
                 $addUser = $manager->addUser($name, $email);
                 $user = $manager->getUserId($name, $email);
-                setcookie('userId', $user['id']);
+                if($name == "screenAdmin" && $email == 'screen_admin@wcoding.com'){
+                    setcookie('adminId', $user['id']);
+                } else{
+                    setcookie('userId', $user['id']);
+                }
             }
-            header("Location: view/vote.php");  
+
+            header("Location: index.php");
+              
+              
         } else if ($emptyFields) {
             $errorMsg = 'Please complete the fields'; 
         } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
@@ -67,6 +75,25 @@
             $newQ = $qManager->makeQuestion();
         }
         require("view/admin.php");
+    }
+
+    function display() {
+        $displayManager = new Manager();
+        $latestQ=$displayManager->doesQExist();
+        $tallyDisplay = $displayManager->tallyVotes($latestQ['id']);
+        $finalVoteCount = ['a' => 0,'b' => 0];
+        foreach($tallyDisplay as $vote){
+            if ($vote == 'a'){
+                $finalVoteCount['a'] += 1;
+            } else if ($vote == 'b'){
+                $finalVoteCount['b'] += 1;
+            }
+        }
+        
+        echo json_encode($finalVoteCount);
+        
+
+        
     }
 
 

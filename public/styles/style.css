@@ -100,7 +100,7 @@ body {
     width: 100%;
 }
 
-#aBtn ,
+#aBtn,
 #bBtn {
     height: 30%;
     width: 70%;
@@ -128,4 +128,28 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+
+/* bar graph for results */
+
+#resultA {
+    /* width: 50px;
+    background-color: red; */
+    /* height: 15px; */
+    /* height: 10px; */
+}
+
+#resultB {
+    /* width: 50px;
+    background-color: green; */
+    /* height: 10px; */
+}
+
+#resultContainer {
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    height: 80%;
+    width: 250px;
+    border: 1px solid black;
+    align-items: flex-end;
 }
