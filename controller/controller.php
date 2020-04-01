@@ -1,10 +1,6 @@
 <?php
     require_once("./model/Manager.php");
 
-    function login() {
-        require("view/login.php");  //change to pg 1 page name
-    }
-
     function register($name, $email) {
         $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
         $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
@@ -36,7 +32,6 @@
         $manager = new Manager();
 
         $questionId = $manager->getQuestion();
-
         if ($answerA OR $answerB) {
             setcookie('hasVoted', $questionId['id'], time()+3*24*3600, null, null, false, true);
             if ($answerA) {
@@ -44,7 +39,6 @@
             } elseif ($answerB) {
                 $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
             }
-            require("view/vote.php");
         }
         require("view/vote.php");
     }

@@ -43,10 +43,10 @@ class Manager {
 
 
     public function insertVote($userId,$questionId,$answer) {
-        // $insertVote = $this->_db->prepare("INSERT INTO users(userId, vote) VALUES(:userId, :answer)");     
-        $insertVote = $this->_db->prepare("INSERT INTO users(userId, questionId, vote) VALUES(:userId, :questionId, :answer)");
-        $insertVote->bindParam(':userId',$userId,PDO::PARAM_STR);
-        $insertVote->bindParam(':questionId',$username,PDO::PARAM_STR);
+        // $insertVote = $this->_db->prepare("INSERT INTO users(userId, vote) VALUES(:userId, :answer)"); 
+        $insertVote = $this->_db->prepare("INSERT INTO votes(userId, questionId, vote) VALUES(:userId, :questionId, :answer)");
+        $insertVote->bindParam(':userId',$userId,PDO::PARAM_INT);
+        $insertVote->bindParam(':questionId',$questionId,PDO::PARAM_INT);
         $insertVote->bindParam(':answer',$answer,PDO::PARAM_STR);
         $status = $insertVote->execute();
         if (!$status) {
@@ -104,14 +104,13 @@ class Manager {
     //-----------question functions---------------
 
     public function getQuestion() {        
-        $getQuestion = $this->_db->prepare("SELECT * FROM questions WHERE green=NULL AND red=NULL");
-        $getQuestion->bindParam(':userId',$userId,PDO::PARAM_STR);
-        $getQuestion->bindParam(':answer',$answer,PDO::PARAM_STR);
+        $getQuestion = $this->_db->prepare("SELECT id FROM questions WHERE green IS null AND red IS null");
+        
         $status = $getQuestion->execute();
         if (!$status) {
             throw new PDOException('Impossible to get question ID');
         }
-        $getQuestion->closeCursor();
+        return $getQuestion->fetch();
     }
 
 
