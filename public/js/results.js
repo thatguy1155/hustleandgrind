@@ -6,12 +6,12 @@ var searchBox = document.getElementById('search');
 var button = document.getElementById('do');
 //grab elements for the textbox and the div that will ultimately host the results
 
-let aResults = document.getElementById('resultA');
-let bResults = document.getElementById('resultB');
-
 
 
 function results() {
+    let aResults = document.getElementById('resultA');
+    let bResults = document.getElementById('resultB');
+
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', `index.php?action=display`);
