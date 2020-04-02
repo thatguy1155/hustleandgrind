@@ -7,13 +7,13 @@
         <link rel="stylesheet" href="public/styles/style.css"/>
     </head> 
     <body>
-        <div id="buttons">
-            <form method="POST" action="index.php" id="voteForm">
-                <input type="hidden" name="action" value="vote"/>
-                <input type="hidden" name="userId" value=<?= $_COOKIE['userId']?> />
-                <input type="submit" name="a" value="a" id="aBtn"/>
-                <input type="submit" name="b" value="b" id="bBtn"/>
-            </form>
+        <div id="voteView">
+            <?= include('buttons.php');?>
         </div>
+        <div id="resultView" class='hide'>
+            <?= include('results.php');?>
+        </div>
+        <script src="public/js/vote.js"></script>
+        <script src="public/js/results.js"></script>
     </body>
 </html>

@@ -57,6 +57,10 @@
         require("view/admin.php");   //change to page 3 page name
     }
 
+    function displayView() {
+        require("view/admin.php");   //change to page 3 page name
+    }
+
 
 
     function newQuestion() {

@@ -26,6 +26,8 @@ try {
             newQuestion();
         } else if ($action === 'display') {
             display();
+        } else if ($action === 'displayView') {
+            displayView();
         }
     } else {
         if ($cookieAdminId) {
