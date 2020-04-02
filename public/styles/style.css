@@ -101,26 +101,31 @@ body {
     height: 90vh;
     width: 100%;
 }
+
+#buttons {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
 #aBtn,
 #bBtn {
     height: 30%;
     width: 70%;
     margin: 5%;
     border: none;
-    border-radius: 10px;
+    border-radius: 65px;
     font-size: 5em;
     color: white;
     text-transform: uppercase;
 }
 
 #aBtn {
-    background-color: blue;
+    background-image: linear-gradient(to right, #3311c9 0%, #244dbe 20%, #2655ac 71%, #3a2cbd 100%);
 }
 
 #bBtn {
-    background-color: red;
+    background-image: linear-gradient(to right, #ca3434 0%, #cf402d 20%, #ec3131 71%, #ad4532 100%);
 }
-
 
 /* admin page css */
 
