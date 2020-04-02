@@ -1,5 +1,5 @@
 <body id="results">
-    <link rel="stylesheet" href="../public/styles/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="public/styles/style.css" rel="stylesheet"/>
         <span id="resultText">Results of the Vote</span>
 
             <div id="resultContainer">             
@@ -8,5 +8,5 @@
             </div>
 
             <!-- <button id="do">do shit</button> -->
-    <script src="../public/js/results.js"></script>
+    <script src="public/js/results.js"></script>
 </body>

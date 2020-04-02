@@ -52,7 +52,6 @@ class Manager {
         if (!$status) {
             throw new PDOException('Unable to add the vote');
         }
-        $insertVote->closeCursor();
     }
     
     
