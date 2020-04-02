@@ -20,7 +20,6 @@
                 if (!$cookieUserId && !$cookieAdminId) {
                     $addUser = $manager->addUser($name, $email);
                     $user = $manager->getUserId($name, $email);
-                    print_r($user);
                     setcookie('userId', $user['id']);
                 }
                 header("Location:index.php?action=vote");     

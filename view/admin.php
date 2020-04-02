@@ -17,6 +17,5 @@
             </form>   
         </div>
     </body>
-    <script src="public/js/admin.js"></script>
     <script src="public/js/results.js"></script>
 </html>
