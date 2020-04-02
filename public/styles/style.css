@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-/* register */
+/* MOBILE */
 
 body {
     margin: 0;
@@ -21,6 +21,8 @@ body {
 .hide {
     display: 'none';
 }
+
+/* register */
 
 #regForm {
     display: flex;
@@ -39,26 +41,26 @@ body {
 
 .regInputContainer {
     position:relative;
-	margin-bottom:25px;
+    margin-bottom:25px;
 }
 
 .regInputContainer label {
     position:absolute;
-	top:0px;
-	left:0px;
-	font-size:16px;
-	color:#fff;
-	transition: all 0.5s ease-in-out;
+    top:0px;
+    left:0px;
+    font-size:16px;
+    color:#fff;
+    transition: all 0.5s ease-in-out;
 }
 
 .regInputContainer input {
     border:0;
-  border-bottom:1px solid #555;  
-  background:transparent;
-  width:100%;
-  padding:8px 0 5px 0;
-  font-size:16px;
-  color:#fff;
+    border-bottom:1px solid #555;  
+    background:transparent;
+    width:100%;
+    padding:8px 0 5px 0;
+    font-size:16px;
+    color:#fff;
 }
 
 .regInputContainer input:focus {
@@ -68,22 +70,21 @@ body {
 }
 
 .regInputContainer input:focus ~ label,
-.regInputContainer input:valid ~ label
- {
-	top:-12px;
-	font-size:12px;
+.regInputContainer input:valid ~ label {
+    top:-12px;
+    font-size:12px;
 }
 
 #regForm input[type=submit] {
     color:#fff;
-	background-color:#e74c3c;
-	outline: none;
+    background-color:#e74c3c;
+    outline: none;
     border: 0;
-	padding:10px 20px;
-	text-transform:uppercase;
-	border-radius:2px;
-	cursor:pointer;
-	position:relative;
+    padding:10px 20px;
+    text-transform:uppercase;
+    border-radius:2px;
+    cursor:pointer;
+    position:relative;
 }
 
 /* vote */
@@ -100,24 +101,29 @@ body {
     width: 100%;
 }
 
+#buttons {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
 #aBtn,
 #bBtn {
     height: 30%;
     width: 70%;
     margin: 5%;
     border: none;
-    border-radius: 10px;
+    border-radius: 65px;
     font-size: 5em;
     color: white;
     text-transform: uppercase;
 }
 
 #aBtn {
-    background-color: blue;
+    background-color: rgba(37, 37, 155);
 }
 
 #bBtn {
-    background-color: red;
+    background-color: rgba(145, 28, 28);
 }
 
 /* admin page css */
@@ -153,3 +159,13 @@ body {
     border: 1px solid black;
     align-items: flex-end;
 }
+
+
+
+/* DESKTOP */
+
+/* @media all and (min-width: 375px)  {
+    #errorMsg {
+        font-size: 20px;
+    }    
+} */
