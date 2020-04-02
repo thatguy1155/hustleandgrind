@@ -5,7 +5,6 @@
     }
 
     function register($name, $email,$cookieUserId,$cookieAdminId) {
-        echo "test helllooooow Marie";
         $manager = new Manager();   
         $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;
         $userExists = $manager->getUserId($name, $email);
@@ -21,7 +20,6 @@
                 if (!$cookieUserId && !$cookieAdminId) {
                     $addUser = $manager->addUser($name, $email);
                     $user = $manager->getUserId($name, $email);
-                    print_r($user);
                     setcookie('userId', $user['id']);
                 }
                 header("Location:index.php?action=vote");     
