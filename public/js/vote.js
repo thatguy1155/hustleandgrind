@@ -37,4 +37,4 @@ function qQuery() {
 
 setInterval(function() {
     qQuery();
-}, 5000);
+}, 2000);
