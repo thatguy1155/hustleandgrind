@@ -13,9 +13,9 @@ try {
             if ($cookieUserId) {
                 header('Location:index.php?action=vote');
             } else{
-                $name = isset($_POST['name']) ? $_POST['name'] : '';
-                $email = isset($_POST['email']) ? $_POST['email'] : '';
-                register($name, $email);
+                $name = isset($_POST['name']) ? $_POST['name'] : null;
+                $email = isset($_POST['email']) ? $_POST['email'] : null;
+                register($name, $email,$cookieUserId,$cookieAdminId);
             }
         } else if ($action === 'vote') {
             $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
@@ -32,12 +32,10 @@ try {
     } else {
         if ($cookieAdminId) {
             header('Location: index.php?action=admin');
+        } else if ($cookieUserId) {
+            header('Location:index.php?action=vote');
         } else {
-            if ($cookieUserId) {
-                header('Location:index.php?action=vote');
-            } else{
-                header('Location:index.php?action=register');
-            }
+            loadRegisterPage();
         }
     }
 }

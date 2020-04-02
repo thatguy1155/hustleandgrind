@@ -1,32 +1,30 @@
 <?php
     require_once("./model/Manager.php");
+    function loadRegisterPage() {
+        require("view/register.php");
+    }
 
-    function register($name, $email) {
-        $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
-        $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
+    function register($name, $email,$cookieUserId,$cookieAdminId) {
+        echo "test helllooooow Marie";
         $manager = new Manager();   
         $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;
         $userExists = $manager->getUserId($name, $email);
         if($userExists){
-            if($cookieUserId||$cookieAdminId){
-                header("Location:index.php");
+            if($userExists['isAdmin']){
+                setcookie('adminId', $userExists['id']);
             } else {
-                if($userExists['isAdmin']){
-                    setcookie('adminId', $userExists['id']);
-                    header("Location:index.php");
-                } else {
-                    setcookie('userId', $userExists['id']);
-                    header("Location:index.php");
-                }
+                setcookie('userId', $userExists['id']);
             }
+            header("Location:index.php");
         } else {
             if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email)) {
                 if (!$cookieUserId && !$cookieAdminId) {
                     $addUser = $manager->addUser($name, $email);
                     $user = $manager->getUserId($name, $email);
+                    print_r($user);
                     setcookie('userId', $user['id']);
                 }
-                header("Location:index.php");     
+                header("Location:index.php?action=vote");     
             } else if ($emptyFields) {
                 $errorMsg = 'Please complete the fields'; 
             } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
@@ -41,7 +39,6 @@
         $manager = new Manager();
 
         $questionId = $manager->getQuestion();
-
         if ($answerA OR $answerB) {
             setcookie('hasVoted', $questionId['id'], time()+3*24*3600, null, null, false, true);
             if ($answerA) {
@@ -50,7 +47,7 @@
                 $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
             }
         }
-        require("view/vote.php");
+        require('view/vote.php');
     }
 
     function admin() {
