@@ -7,13 +7,25 @@
         <link rel="stylesheet" href="public/styles/style.css"/>
     </head> 
     <body>
-        <div id="voteView">
-            <?= include('buttons.php');?>
-        </div>
-        <div id="resultView" class='hide'>
-            <?= include('results.php');?>
-        </div>
+    <?php 
+    $votedValue="";
+    if(isset($_COOKIE['hasVoted'])) {
+        $votedValue = $_COOKIE['hasVoted'];
+    }
+    ?>
+        <input type="hidden" name="action" id="votedValue" value="<?=$votedValue;?>"/>
+        
+            <div id="resultView" class='hide' >
+                <?= include('results.php');?>
+            </div>
+
+            <div id="voteView">
+                <?= include('buttons.php');?>
+            </div>
+       
+       
         <script src="public/js/vote.js"></script>
         <script src="public/js/results.js"></script>
+        
     </body>
 </html>

@@ -2,69 +2,39 @@
 let aBtn = document.getElementById('aBtn');
 let bBtn = document.getElementById('bBtn');
 let voteView = document.getElementById('voteView');
-let displayView = document.getElementById('displayView');
+let resultView = document.getElementById('resultView');
+let votedValue = document.getElementById('votedValue').value;
 
+console.log(votedValue);
 
-aBtn.addEventListener(click,function() {
-    voteView.classList.add('hide');
-    displayView.classList.remove('hide');
+function qQuery() {
+    var xhr = new XMLHttpRequest();
 
+    xhr.open('GET', `index.php?action=getQNumber`);
 
+    xhr.addEventListener('readystatechange', function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            obj = xhr.response;
+            console.log(obj);
+            if(obj == "button"){
+                voteView.classList.remove('hide');
+                resultView.classList.add('hide');
+            } else {
+                resultView.classList.remove('hide');
+                voteView.classList.add('hide');  
+            }
 
-    // var xhr = new XMLHttpRequest();
+        } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200 & xhr.status === 0) {
 
-    // xhr.open('GET', `index.php?action=display`);
+            alert('there was an error \n\n Code:' + xhr.status + '\nText : ' + xhr.statusText);
+            //just in case
+        }
 
-    // xhr.addEventListener('readystatechange', function() {
-    //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-    //         obj = JSON.parse(xhr.response);
-    //         let aCount = (obj['a']);
-    //         let bCount = (obj['b']);
+    });
+    xhr.send(null);
 
-    //         aResults.innerHTML = `${aCount}`;
-    //         bResults.innerHTML = `${bCount}`;
+};
 
-    //     } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200 & xhr.status === 0) {
-
-    //         alert('there was an error \n\n Code:' + xhr.status + '\nText : ' + xhr.statusText);
-    //         //just in case
-    //     }
-
-    // });
-    // xhr.send(null);
-
-});
-
-
-
-
-
-
-// function results() {
-//     var xhr = new XMLHttpRequest();
-
-//     xhr.open('GET', `index.php?action=display`);
-
-//     xhr.addEventListener('readystatechange', function() {
-//         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-//             obj = JSON.parse(xhr.response);
-//             let aCount = (obj['a']);
-//             let bCount = (obj['b']);
-
-//             aResults.innerHTML = `${aCount}`;
-//             bResults.innerHTML = `${bCount}`;
-
-//         } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200 & xhr.status === 0) {
-
-//             alert('there was an error \n\n Code:' + xhr.status + '\nText : ' + xhr.statusText);
-//             //just in case
-//         }
-
-//     });
-//     xhr.send(null);
-
-// };
-
-// setInterval(function() {
-//     results();
-// }, 5000);
+setInterval(function() {
+    qQuery();
+}, 5000);

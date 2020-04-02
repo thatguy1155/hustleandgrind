@@ -5,7 +5,6 @@
     }
 
     function register($name, $email,$cookieUserId,$cookieAdminId) {
-        echo "test helllooooow Marie";
         $manager = new Manager();   
         $emptyFields = strlen(trim($name)) === 0 || strlen(trim($email)) === 0;
         $userExists = $manager->getUserId($name, $email);
@@ -34,10 +33,12 @@
         } 
         
     }
+    function loadVotePage() {
+        require("view/vote.php");
+    }
 
-    function vote($userId,$answerA,$answerB) {
+    function vote($userId,$answerA,$answerB, $cookieHasVoted) {
         $manager = new Manager();
-
         $questionId = $manager->getQuestion();
         if ($answerA OR $answerB) {
             setcookie('hasVoted', $questionId['id'], time()+3*24*3600, null, null, false, true);
@@ -46,16 +47,26 @@
             } elseif ($answerB) {
                 $votes = $manager->insertVote($userId,$questionId['id'],$answerB);
             }
-        }
-        require('view/vote.php');
+        }    
+        header("Location:index.php?action=vote");// add param    
     }
 
     function admin() {
         require("view/admin.php");   //change to page 3 page name
     }
 
-    function displayView() {
-        require("view/admin.php");   //change to page 3 page name
+    function getQNumber($cookieHasVoted, $cookieUserId) {
+        $qMessenger = new Manager();
+        $madeQ = $qMessenger->doesQExist();
+        $userAlreadyVoted =  $qMessenger->getUserVote($cookieUserId, $madeQ['id']);
+        if($cookieHasVoted AND $cookieHasVoted != $madeQ['id']) {
+            setcookie('hasVoted', "", time()+3*24*3600, null, null, false, true);
+            echo "button";
+        } else if($userAlreadyVoted == "voted"){
+            echo "result";
+        } else{
+            echo "button";
+        }  
     }
 
 

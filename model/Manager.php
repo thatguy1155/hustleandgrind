@@ -53,6 +53,7 @@ class Manager {
             throw new PDOException('Unable to add the vote');
         }
         $insertVote->closeCursor();
+        return true;
     }
     
     
@@ -99,7 +100,18 @@ class Manager {
         $ballot->closeCursor();
     }
 
-    
+    public function getUserVote($userId, $questionId){
+        $getUserVote = $this->_db->prepare("SELECT id FROM votes WHERE userId =:userId AND questionId= :questionId");
+        $getUserVote->bindParam(':userId', $userId , PDO::PARAM_INT);
+        $getUserVote->bindParam(':questionId', $questionId , PDO::PARAM_INT);
+        $getUserVote->execute();
+        $status =  $getUserVote->fetch();
+        if(!$status) {
+            return false;
+        }
+        return "voted";
+        
+    }
 
     //-----------question functions---------------
 

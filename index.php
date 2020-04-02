@@ -18,16 +18,27 @@ try {
                 register($name, $email,$cookieUserId,$cookieAdminId);
             }
         } else if ($action === 'vote') {
+            $cookieHasVoted = isset($_COOKIE['hasVoted']) ? $_COOKIE['hasVoted'] : '';
             $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
             $answerA = isset($_POST['a']) ? $_POST['a'] : '';
             $answerB = isset($_POST['b']) ? $_POST['b'] : '';
-            vote($userId,$answerA,$answerB);
+            if($cookieHasVoted){
+                loadVotePage();   
+            } else {
+                if($answerA OR $answerB){
+                    vote($userId,$answerA,$answerB, $cookieHasVoted);
+                } else {
+                    loadVotePage();
+                }
+            }
+            
         } else if ($action === 'newQuestion') {
             newQuestion();
         } else if ($action === 'display') {
             display();
-        } else if ($action === 'displayView') {
-            displayView();
+        } else if ($action === 'getQNumber') {
+            $cookieHasVoted = isset($_COOKIE['hasVoted']) ? $_COOKIE['hasVoted'] : '';
+            getQNumber($cookieHasVoted, $cookieUserId);
         }
     } else {
         if ($cookieAdminId) {

@@ -33,7 +33,6 @@ function results() {
 
     });
     xhr.send(null);
-
 };
 
 setInterval(function() {
