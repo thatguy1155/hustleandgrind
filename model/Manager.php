@@ -15,12 +15,12 @@ class Manager {
     }
   
     public function getUserId($name, $email) {
-          $user = $this->_db->prepare("SELECT id FROM users WHERE name = :name AND email = :email");
-          $user->bindParam(':name', $name, PDO::PARAM_STR);
-          $user->bindParam(':email', $email, PDO::PARAM_STR);
+          $user = $this->_db->prepare("SELECT id, isAdmin FROM users WHERE name = :name AND email = :email");
+          $user->bindParam(':name', $name);
+          $user->bindParam(':email', $email);
           $resp = $user->execute();
           if(!$resp) {
-              throw new PDOException('Unable to retrieve user ID');
+             return false;
           }
           return $user->fetch();
       }

@@ -1,11 +1,4 @@
-// get query selector for the hidden inputs
-// set attribute of height for the resultA and B
 
-// const valueA = document.querySelector('#heightA');
-// const valueB = document.querySelector('#heightB');
-
-// console.log(valueA.value);
-// console.log(valueB.value);
 
 
 // AJAX BELOW
@@ -17,13 +10,11 @@ let aResults = document.getElementById('resultA');
 let bResults = document.getElementById('resultB');
 
 
-// button.addEventListener('click', function() {
-//     console.log('works here');
 
-// run ajax request to backend w the contents of the text box
 function results() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://localhost/project/hustleandgrind/index.php?action=display&xml=1`);
+
+    xhr.open('GET', `index.php?action=display`);
 
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

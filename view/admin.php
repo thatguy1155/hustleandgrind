@@ -12,6 +12,7 @@
             <?php include("results.php"); ?>
             <form id='resetForm' action= 'index.php' method='post'>
                 <input type="hidden" name="action" value="newQuestion"/>
+                <input type="hidden" name="xml" value="1"/>
                 <input type="submit" id="resetButton" value='reset'/>
             </form>   
         </div>

@@ -2,17 +2,6 @@
 require("./controller/controller.php");
 $cookieUserId = isset($_COOKIE['userId']) ? $_COOKIE['userId'] : '';
 $cookieAdminId = isset($_COOKIE['adminId']) ? $_COOKIE['adminId'] : '';
-$xmlRequest = isset($_REQUEST['xml']) ? $_REQUEST['xml'] : '';
-$voted = isset($_POST['voted']) ? $_POST['voted'] : '';
-    // if(!$xmlRequest && !$voted){
-    //     if ($cookieAdminId) {
-    //         header('Location: view/admin.php');
-    //     } else if ($cookieUserId) {
-    //         header('Location: view/vote.php');
-    //     }
-    // }
-
-
 
 try {
     $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
@@ -24,9 +13,9 @@ try {
             if ($cookieUserId) {
                 header('Location:index.php?action=vote');
             } else{
-                $name = isset($_POST['name']) ? $_POST['name'] : '';
-                $email = isset($_POST['email']) ? $_POST['email'] : '';
-                register($name, $email);
+                $name = isset($_POST['name']) ? $_POST['name'] : null;
+                $email = isset($_POST['email']) ? $_POST['email'] : null;
+                register($name, $email,$cookieUserId,$cookieAdminId);
             }
         } else if ($action === 'vote') {
             $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
@@ -41,12 +30,10 @@ try {
     } else {
         if ($cookieAdminId) {
             header('Location: index.php?action=admin');
+        } else if ($cookieUserId) {
+            header('Location:index.php?action=vote');
         } else {
-            if ($cookieUserId) {
-                header('Location:index.php?action=vote');
-            } else{
-                header('Location:index.php?action=register');
-            }
+            loadRegisterPage();
         }
     }
 }
