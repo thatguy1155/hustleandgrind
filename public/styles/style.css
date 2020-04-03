@@ -151,21 +151,30 @@ body {
     width: 50%;
     height: 22%;
     justify-content: center;
+    position:absolute;
+    top:40%;
+    left:25%;
 }
 
 #results {
     background-color: rgba(0, 0, 0, 0.9);
+    position:relative;
 }
 
 .score {
     color: white;
-    font-size: 45px;
     border-radius: 10px;
+    width:25%;
     margin: 0px 10px;
     padding: 4% 8%;
-    font-size: 3em;
+    font-size: 4em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
-
+#resetForm{
+    margin-top: 20%;
+}
 #resetButton {
     width: 100px;
     height: 50px;
