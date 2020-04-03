@@ -13,6 +13,16 @@
             <form id='resetForm' action= 'index.php' method='post'>
                 <input type="hidden" name="action" value="newQuestion"/>
                 <input type="hidden" name="xml" value="1"/>
+                <p id="newQsField">
+                    <label for="newQs">New question:</label>
+                    <input type="text" name="newQs" id="newQs">
+                </p>
+                <p id="newOptionsField">
+                    <label for="newOptionA">Option A</label>
+                    <input type="text" name="newOptionA" id="newOptionA">
+                    <label for="newOptionB">Option B</label>
+                    <input type="text" name="newOptionB" id="newOptionB">
+                </p>
                 <input type="submit" id="resetButton" value='reset'/>
             </form>   
         </div>
