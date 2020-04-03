@@ -100,6 +100,7 @@
     function display() {
         $displayManager = new Manager();
         $latestQ=$displayManager->doesQExist();
+        $latestQData=$displayManager->getQuestion();
         $tallyDisplay = $displayManager->tallyVotes($latestQ['id']);
         $finalVoteCount = ['a' => 0,'b' => 0];
         foreach($tallyDisplay as $vote){
@@ -109,6 +110,9 @@
                 $finalVoteCount['b'] += 1;
             }
         }
+        array_push($finalVoteCount,$latestQData['question']);
+        array_push($finalVoteCount,$latestQData['answerBlue']);
+        array_push($finalVoteCount,$latestQData['answerRed']);
         echo json_encode($finalVoteCount);
     }
 
