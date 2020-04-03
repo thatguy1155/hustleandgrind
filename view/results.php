@@ -1,4 +1,4 @@
-<body id="results">
+<div id="results">
     <link rel="stylesheet" href="public/styles/style.css" rel="stylesheet"/>
         <!-- <span id="resultText">Results of the Vote</span> -->
         <div id="resultContainer">
@@ -9,4 +9,4 @@
             <div id="resultB" class="score"></div>           
         </div>
     <script src="public/js/results.js"></script>
-</body>
+</div>
