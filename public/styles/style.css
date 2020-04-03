@@ -151,6 +151,13 @@ body {
 
 /* results */
 
+.question {
+    font-size: 1.2em;
+    margin: 0;
+    color: white;
+    padding-bottom: 50px;
+}
+
 #resultView {
     height: 100%;
 }
@@ -160,21 +167,17 @@ body {
     position:relative;
 }
 
-/* #resultContainer {
+#resultContainer {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    width: 50%;
-    height: 22%;
-    align-content: center;
-    position:absolute;
-    top:40%;
-    left:25%;
-} */
+}
 
 .score {
     color: white;
     border-radius: 10px;
-    width:25%;
+    width: 109px;
     margin: 0px 10px;
     padding: 4% 8%;
     font-size: 4em;

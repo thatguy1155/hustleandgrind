@@ -15,7 +15,6 @@ function qQuery() {
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             obj = xhr.response;
-            console.log(obj);
             if(obj == "button"){
                 voteView.classList.remove('hide');
                 resultView.classList.add('hide');
