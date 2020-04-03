@@ -75,15 +75,15 @@ body {
 }
 
 #regForm input[type=submit] {
-    color: #fff;
-    background-color: #e74c3c;
+    color: rgb(255, 255, 255);
+    background-color: rgb(199, 52, 52);
     outline: none;
     border: 0;
-    padding: 10px 20px;
+    padding: 15px 20px;
     text-transform: uppercase;
     border-radius: 2px;
-    cursor: pointer;
     position: relative;
+    -webkit-appearance: none;
 }
 
 
