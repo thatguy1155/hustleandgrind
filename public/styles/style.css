@@ -89,6 +89,10 @@ body {
 
 /* vote */
 
+#voteView {
+    height: 100vh;
+}
+
 #buttons,
 #voteForm {
     display: flex;
