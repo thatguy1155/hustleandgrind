@@ -75,7 +75,7 @@ class Manager {
     }
 
     public function pollsOpen($latestQ){
-        $polls = $this->_db->prepare("UPDATE questions SET green = 0, red = 0 WHERE id = :latestQ");
+        $polls = $this->_db->prepare("UPDATE questions SET blue = 0, red = 0 WHERE id = :latestQ");
         $polls->bindParam(':latestQ',$latestQ,PDO::PARAM_INT);
         $pollsOpen = $polls->execute();
         if(!$pollsOpen) {
@@ -85,8 +85,8 @@ class Manager {
     }
 
     public function enterTally($latestQ,$voteCategory){
-        if ($voteCategory == 'green'){
-            $ballot = $this->_db->prepare("UPDATE questions SET green = green + 1 WHERE id = :latestQ");
+        if ($voteCategory == 'blue'){
+            $ballot = $this->_db->prepare("UPDATE questions SET blue = blue + 1 WHERE id = :latestQ");
         } else if ($voteCategory == 'red'){
             $ballot = $this->_db->prepare("UPDATE questions SET red = red + 1 WHERE id = :latestQ");
         }
@@ -123,7 +123,7 @@ class Manager {
     }
 
     function makeQuestion(){      
-        $addQ = $this->_db->prepare("INSERT INTO questions(green,red) VALUES(NULL, NULL)");
+        $addQ = $this->_db->prepare("INSERT INTO questions(blue,red) VALUES(NULL, NULL)");
         $status = $addQ->execute();
         if (!$status) {
             throw new PDOException('Impossible to add the question!');

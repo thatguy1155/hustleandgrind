@@ -65,7 +65,7 @@
             $openPolls = $qManager->pollsOpen($madeQ['id']);
             foreach($tally as $vote){
                 if ($vote == 'a'){
-                    $voteValue = 'green';
+                    $voteValue = 'blue';
                 } else if ($vote == 'b'){
                     $voteValue = 'red';
                 }
