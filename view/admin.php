@@ -11,6 +11,9 @@
         <div id="adminMainWrapper">
             <?php include("results.php"); ?>
             <form id='resetForm' action= 'index.php' method='post'>
+                <input type="text" id="question" name="question">
+                <input type="text" id="answerRed" name="answerRed">
+                <input type="text" id="answerBlue" name="answerBlue">
                 <input type="hidden" name="action" value="newQuestion"/>
                 <input type="hidden" name="xml" value="1"/>
                 <input type="submit" id="resetButton" value='reset'/>

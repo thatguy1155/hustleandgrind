@@ -116,7 +116,7 @@ class Manager {
     //-----------question functions---------------
 
     public function getQuestion() {        
-        $getQuestion = $this->_db->prepare("SELECT id FROM questions WHERE blue IS null AND red IS null");
+        $getQuestion = $this->_db->prepare("SELECT id,question,answerRed,answerBlue FROM questions WHERE blue IS null AND red IS null");
         
         $status = $getQuestion->execute();
         if (!$status) {
@@ -135,8 +135,13 @@ class Manager {
         return $qExists->fetch();
     }
 
-    function makeQuestion(){      
-        $addQ = $this->_db->prepare("INSERT INTO questions(blue,red) VALUES(NULL, NULL)");
+    function makeQuestion($question,$answerBlue,$answerRed){   
+        echo $question .$answerRed .$answerBlue; 
+        $addQ = $this->_db->prepare("INSERT INTO questions(blue,red,question,answerBlue,answerRed) VALUES(NULL, NULL, :question, :answerBlue, :answerRed)");
+        $addQ->bindParam(':question', $question , PDO::PARAM_STR);
+        $addQ->bindParam(':answerBlue', $answerBlue , PDO::PARAM_STR);
+        $addQ->bindParam(':answerRed', $answerRed , PDO::PARAM_STR);
+        
         $status = $addQ->execute();
         if (!$status) {
             throw new PDOException('Impossible to add the question!');

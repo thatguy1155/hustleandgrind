@@ -141,6 +141,9 @@ body {
 
 
 /* results */
+.answerLabel{
+    color:white;
+}
 
 #resultContainer {
     display: flex;

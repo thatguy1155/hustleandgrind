@@ -33,6 +33,8 @@
         
     }
     function loadVotePage() {
+        $manager = new Manager();
+        $questionData = $manager->getQuestion();
         require("view/vote.php");
     }
 
@@ -51,6 +53,8 @@
     }
 
     function admin() {
+        $manager = new Manager();
+        $questionData = $manager->getQuestion();
         require("view/admin.php");   //change to page 3 page name
     }
 
@@ -70,11 +74,11 @@
 
 
 
-    function newQuestion() {
+    function newQuestion($question,$answerRed,$answerBlue) {
         $qManager = new Manager();
         $madeQ = $qManager->doesQExist();
         if(!$madeQ){
-            $makeQ = $qManager->makeQuestion();
+            $makeQ = $qManager->makeQuestion($question,$answerRed,$answerBlue);
             echo $makeQ;
         } else {
             $tally = $qManager->tallyVotes($madeQ['id']);
@@ -87,7 +91,7 @@
                 }
                 $ballotBox = $qManager->enterTally($madeQ['id'],$voteValue);
             }
-            $newQ = $qManager->makeQuestion();
+            $newQ = $qManager->makeQuestion($question,$answerRed,$answerBlue);
         }
         
         header('Location:index.php?action=admin');

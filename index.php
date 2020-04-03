@@ -33,7 +33,10 @@ try {
             }
             
         } else if ($action === 'newQuestion') {
-            newQuestion();
+            $answerRed = isset($_REQUEST['answerRed']) ? $_REQUEST['answerRed'] : '';
+            $answerBlue = isset($_REQUEST['answerBlue']) ? $_REQUEST['answerBlue'] : '';
+            $question = isset($_REQUEST['question']) ? $_REQUEST['question'] : '';
+            newQuestion($question,$answerRed,$answerBlue);
         } else if ($action === 'display') {
             display();
         } else if ($action === 'getQNumber') {
