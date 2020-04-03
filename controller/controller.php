@@ -6,7 +6,7 @@
     }
 
     //function register($name, $email, $cookieUserId, $cookieIsAdmin) {
-    function register($name, $email) {
+    function register($name, $email, $info) {
         $manager = new Manager();
         $len_name = strlen(trim($name));
         $len_email = strlen(trim($email));
@@ -25,9 +25,15 @@
             if (! $userData) {
                 // New user.
                 $new_id = md5($name . $email);
-                $addUser = $manager->addUser($name, $email, $new_id);
+                $addUser = $manager->addUser($name, $email, $info, $new_id);
                 // $user = $manager->getUserId($name, $email);
                 setcookie('userId', $new_id);
+
+                $encoded_name = urlencode($name);
+                $encoded_info = urlencode($info);
+                $curl = curl_init("http://localhost:8080/makelabel.php?name={$encoded_name}&info={$encoded_info}");
+                curl_exec($curl);
+                
                 header("Location:index.php?action=vote");
                 return;
             }
@@ -52,8 +58,13 @@
     function loadVotePage() {
         global $cookieUserId;
         $qMessenger = new Manager();
-        $madeQ = $qMessenger->doesQExist();
-        $userAlreadyVoted = $qMessenger->didUserVote($cookieUserId, $madeQ['id']);
+        $currQ = $qMessenger->getCurrentQuestionId();
+        $lastVotedQuestionId = $qMessenger->getLastVotedQuestionId($cookieUserId);
+        if ($lastVotedQuestionId === false) $lastVotedQuestionId['id'] = 0;
+        // $userAlreadyVoted = $qMessenger->didUserVote($cookieUserId, $currQ['id']);
+        $userAlreadyVoted = ($currQ['id'] === $lastVotedQuestionId['id']);
+
+        $questionData = $qMessenger->getQuestion($currQ['id']);
 
         require("view/vote.php");
     }
@@ -61,7 +72,7 @@
     function vote($userId, $answer, $cookieHasVoted) {
         $manager = new Manager();
         if ($answer) {
-            $questionId = $manager->getQuestion();
+            $questionId = $manager->getCurrentQuestionId();
             setcookie('lastVotedQuestion', ''.$questionId['id'], time()+3*24*3600, null, null, false, true);
             $manager->insertVote($userId, $questionId['id'], $answer);
             //header("Location:index.php?action=vote");
@@ -69,6 +80,10 @@
     }
 
     function admin() {
+        $manager = new Manager();
+        $questionId = $manager->getCurrentQuestionId();
+        $questionData = $manager->getQuestion($questionId['id']);
+        
         require("view/admin.php");   //change to page 3 page name
     }
 
@@ -90,13 +105,22 @@
         echo json_encode($responseData);
     }
 
+    function getQuestionId() {
+        $responseData = [];
+        $qManager = new Manager(); 
+        $newIdRow = $qManager->getCurrentQuestionId();
+        if (count($newIdRow) > 0) {
+            $responseData['questionId'] = $newIdRow['id'];
+        }
 
+        echo json_encode($responseData);
+    }
 
-    function newQuestion() {
+    function newQuestion($question,$answerRed,$answerBlue) {
         $qManager = new Manager();
         $madeQ = $qManager->doesQExist();
         if(!$madeQ){
-            $makeQ = $qManager->makeQuestion();
+            $makeQ = $qManager->makeQuestion($question,$answerRed,$answerBlue);
             echo $makeQ;
         } else {
             $tally = $qManager->getVotes($madeQ['id']);
@@ -109,7 +133,7 @@
                 }
                 $ballotBox = $qManager->enterTally($madeQ['id'],$voteValue);
             }
-            $newQ = $qManager->makeQuestion();
+            $newQ = $qManager->makeQuestion($question,$answerRed,$answerBlue);
         }
         
         header('Location:index.php?action=admin');
@@ -117,7 +141,7 @@
 
     function display() {
         $displayManager = new Manager();
-        $latestQ = $displayManager->doesQExist();
+        $latestQ = $displayManager->getCurrentQuestionId();
         $allVotes = $displayManager->getVotes($latestQ['id']);
 
         // Create the vote count and return.
@@ -129,6 +153,12 @@
                 $finalVoteCount['b'] += 1;
             }
         }
+
+        $latestQData = $displayManager->getQuestion($latestQ['id']);
+
+        array_push($finalVoteCount, isset($latestQData['question']) ? $latestQData['question'] : '');
+        array_push($finalVoteCount, isset($latestQData['answerBlue']) ? $latestQData['answerBlue'] : '');
+        array_push($finalVoteCount, isset($latestQData['answerRed']) ? $latestQData['answerRed'] : '');
 
         echo json_encode($finalVoteCount);
     }

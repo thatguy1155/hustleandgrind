@@ -11,17 +11,20 @@
         <div id="adminMainWrapper">
             <?php include("results.php"); ?>
             <form id='resetForm' action= 'index.php' method='post'>
+                <!-- <input type="text" id="question" name="question">
+                <input type="text" id="answerRed" name="answerRed">
+                <input type="text" id="answerBlue" name="answerBlue"> -->
                 <input type="hidden" name="action" value="newQuestion"/>
                 <input type="hidden" name="xml" value="1"/>
                 <p id="newQsField">
                     <label for="newQs">New question:</label>
-                    <input type="text" name="newQs" id="newQs">
+                    <input type="text" name="question" id="newQs">
                 </p>
                 <p id="newOptionsField">
                     <label for="newOptionA">Option A</label>
-                    <input type="text" name="newOptionA" id="newOptionA">
+                    <input type="text" name="answerRed" id="newOptionA">
                     <label for="newOptionB">Option B</label>
-                    <input type="text" name="newOptionB" id="newOptionB">
+                    <input type="text" name="answerBlue" id="newOptionB">
                 </p>
                 <input type="submit" id="resetButton" value='reset'/>
             </form>   

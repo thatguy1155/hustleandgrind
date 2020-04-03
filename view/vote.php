@@ -15,20 +15,27 @@
     ?>
         <input type="hidden" name="action" id="votedValue" value="<?=$votedValue;?>"/>
         
-        <div id="resultView" class='hide' >
-            <?php include('results.php'); ?>
-        </div>
-
-        <div id="voteView">
-            <?php include('buttons.php'); ?>
-        </div>
+        <?php if ($userAlreadyVoted) {
+            ?>
+            <div id="resultView">
+                <?php include('results.php'); ?>
+            </div>
+        <?php }
+        else {?>
+            <div id="voteView">
+                <?php include('buttons.php'); ?>
+            </div>
+        <?php } ?>
        
         <script src="public/js/vote.js"></script>
         <!-- <script src="public/js/results.js"></script> -->
         <?php
-            if (isset($userAlreadyVoted) && $userAlreadyVoted) {
-                echo("<script>displayResults(true);</script>");
-            }
+            // if (isset($userAlreadyVoted) && $userAlreadyVoted) {
+            //     echo("<script>displayResults(true);</script>");
+            // }
+            // else {
+                echo("<script>uiQuestionId = {$currQ['id']};\n uiVotedId = {$lastVotedQuestionId['id']}; </script>");
+            // }
         ?>
     </body>
 </html>

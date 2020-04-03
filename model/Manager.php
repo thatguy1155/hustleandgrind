@@ -25,13 +25,15 @@ class Manager {
           return $user->fetch(PDO::FETCH_ASSOC);
       }
 
-    public function addUser($name, $email, $userId) {
+    public function addUser($name, $email, $info, $userId) {
         $name = htmlspecialchars($name);
         $email = htmlspecialchars($email);
-        $addUser = $this->_db->prepare("INSERT INTO users(name, email, ext_id) VALUES(:name, :email, :userId)");
+        $info = htmlspecialchars($info);
+        $addUser = $this->_db->prepare("INSERT INTO users(name, email, info, ext_id) VALUES(:name, :email, :info, :userId)");
         $addUser->bindParam(':name',$name,PDO::PARAM_STR);
         $addUser->bindParam(':email',$email,PDO::PARAM_STR);
-        $addUser->bindParam(':ext_id',$userId,PDO::PARAM_STR);
+        $addUser->bindParam(':info',$info,PDO::PARAM_STR);
+        $addUser->bindParam(':userId',$userId,PDO::PARAM_STR);
         $status = $addUser->execute();
         if (!$status) {
             throw new PDOException('Unable to add the user');
@@ -50,10 +52,10 @@ class Manager {
         $insertVote->bindParam(':questionId',$questionId,PDO::PARAM_INT);
         $insertVote->bindParam(':answer',$answer,PDO::PARAM_STR);
         $status = $insertVote->execute();
-        if (!$status) {
-            print_r($this->_db->errorInfo());
-            throw new PDOException('Unable to add the vote');
-        }
+        // if (!$status) {
+            // print_r($this->_db->errorInfo());
+            // throw new PDOException('Unable to add the vote');
+        // }
         $insertVote->closeCursor();
         return;
     }
@@ -115,15 +117,29 @@ class Manager {
         return true;
     }
 
+    public function getLastVotedQuestionId($userId){
+        $getUserVote = $this->_db->prepare("SELECT max(`votes`.`questionId`) as id FROM `votes` JOIN `users` ON votes.userId = users.id WHERE `users`.`ext_id` = :userId LIMIT 1");
+        $getUserVote->bindParam(':userId', $userId , PDO::PARAM_INT);
+        $getUserVote->execute();
+        // $status = $getUserVote->fetch();
+        // if(!$status) {
+        //     return false;
+        // }
+        return $getUserVote->fetch();
+    }
+
     //-----------question functions---------------
 
-    public function getQuestion() {        
-        $getQuestion = $this->_db->prepare("SELECT id FROM questions WHERE blue IS null AND red IS null");
-        
+    public function getQuestion($thisId) {        
+        //$getQuestion = $this->_db->prepare("SELECT id, question, answerRed, answerBlue FROM questions WHERE blue IS null AND red IS null");
+        $getQuestion = $this->_db->prepare("SELECT id, question, answerRed, answerBlue FROM questions WHERE id = :thisId");
+        $getQuestion->bindParam(':thisId', $thisId , PDO::PARAM_INT); 
+
         $status = $getQuestion->execute();
         if (!$status) {
             throw new PDOException('Impossible to get question ID');
         }
+
         return $getQuestion->fetch();
     }
 
@@ -139,8 +155,17 @@ class Manager {
         return $qExists->fetch();
     }
 
-    function makeQuestion(){      
-        $addQ = $this->_db->prepare("INSERT INTO questions(blue,red) VALUES(NULL, NULL)");
+    function getCurrentQuestionId() {
+        return $this->doesQExist();
+    }
+
+    function makeQuestion($question,$answerBlue,$answerRed){   
+        // echo $question .$answerRed .$answerBlue; 
+        $addQ = $this->_db->prepare("INSERT INTO questions (question, answerBlue, answerRed) VALUES(:question, :answerBlue, :answerRed)");
+        $addQ->bindParam(':question', $question , PDO::PARAM_STR);
+        $addQ->bindParam(':answerBlue', $answerBlue , PDO::PARAM_STR);
+        $addQ->bindParam(':answerRed', $answerRed , PDO::PARAM_STR);
+        
         $status = $addQ->execute();
         if (!$status) {
             throw new PDOException('Impossible to add the question!');

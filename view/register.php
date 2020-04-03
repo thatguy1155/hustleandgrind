@@ -15,8 +15,12 @@
                 <label for="name">Name</label>
             </div>
             <div class="regInputContainer">		
-                <input type="text" name="email" id="email" required="">
+                <input type="email" name="email" id="email" required="">
                 <label for="email">Email</label>
+            </div>
+            <div class="regInputContainer">		
+                <input type="text" name="info" id="info">
+                <label for="info">Description</label>
             </div>
             <input type="submit" name="register" id="register" value="Register">
         </form>	
