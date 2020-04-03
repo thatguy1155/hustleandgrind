@@ -35,7 +35,7 @@ function results() {
 
             aResults.innerHTML = `${aCount}`;
             bResults.innerHTML = `${bCount}`;
-            question.innerText = obj[0];
+            question.innerText = q;
             answerBlue.innerText = ansA;
             answerRed.innerText = obj[2];
 
