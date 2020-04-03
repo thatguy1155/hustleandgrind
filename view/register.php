@@ -8,7 +8,7 @@
     </head> 
     <body>
         <form method="post" action="index.php" id="regForm">
-            <p id="errorMsg"><?= $errorMsg = isset($errorMsg) ? $errorMsg : ''; ?></p>
+            <p id="errorMsg"><?= isset($errorMsg) ? $errorMsg : ''; ?></p>
             <input type="hidden" name="action" value="register">
             <div class="regInputContainer">
                 <input type="text" name="name" id="name" required="">

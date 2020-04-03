@@ -16,7 +16,7 @@ function results() {
 
     xhr.open('GET', `index.php?action=display`);
 
-    xhr.addEventListener('readystatechange', function() {
+    xhr.addEventListener('readystatechange', function () {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             obj = JSON.parse(xhr.response);
             let aCount = (obj['a']);
@@ -35,6 +35,7 @@ function results() {
     xhr.send(null);
 };
 
-setInterval(function() {
+results();
+setInterval(function () {
     results();
 }, 5000);
