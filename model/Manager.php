@@ -103,7 +103,7 @@ class Manager {
     //-----------question functions---------------
 
     public function getQuestion() {        
-        $getQuestion = $this->_db->prepare("SELECT id FROM questions WHERE green IS null AND red IS null");
+        $getQuestion = $this->_db->prepare("SELECT id FROM questions WHERE blue IS null AND red IS null");
         
         $status = $getQuestion->execute();
         if (!$status) {
