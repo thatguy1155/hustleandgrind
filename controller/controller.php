@@ -16,7 +16,7 @@
             }
             header("Location:index.php");
         } else {
-            if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email)) {
+            if (strlen(trim($email)) > 0 && strlen(trim($name)) > 0 && preg_match("#^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$#", $email)) {
                 if (!$cookieUserId && !$cookieAdminId) {
                     $addUser = $manager->addUser($name, $email);
                     $user = $manager->getUserId($name, $email);
@@ -25,7 +25,7 @@
                 header("Location:index.php?action=vote");     
             } else if ($emptyFields) {
                 $errorMsg = 'Please complete the fields'; 
-            } else if (!$emptyFields && !(preg_match("#^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$#", $email))) {
+            } else if (!$emptyFields && !(preg_match("#^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,6}$#", $email))) {
                 $errorMsg = 'Please enter a correct email address';
             }
             require("view/register.php");

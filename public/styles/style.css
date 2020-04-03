@@ -89,6 +89,10 @@ body {
 
 /* vote */
 
+#voteView {
+    height: 100vh;
+}
+
 #buttons,
 #voteForm {
     display: flex;
@@ -102,7 +106,7 @@ body {
     width: 100%;
 }
 
-#buttons {
+#buttons, #resultContainer {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
 }
@@ -127,6 +131,11 @@ body {
     background-image: linear-gradient(to right, #ca3434 0%, #cf402d 20%, #ec3131 71%, #ad4532 100%);
 }
 
+.option {
+    color: white;
+    font-size: 1.2em;
+}
+
 /* admin page css */
 
 #adminMainWrapper {
@@ -145,20 +154,25 @@ body {
     color:white;
 }
 
-#resultContainer {
-    display: flex;
-    width: 50%;
-    height: 22%;
-    justify-content: center;
-    position:absolute;
-    top:40%;
-    left:25%;
+#resultView {
+    height: 100%;
 }
 
 #results {
     background-color: rgba(0, 0, 0, 0.9);
     position:relative;
 }
+
+/* #resultContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 22%;
+    align-content: center;
+    position:absolute;
+    top:40%;
+    left:25%;
+} */
 
 .score {
     color: white;
