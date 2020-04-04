@@ -11,19 +11,33 @@ var button = document.getElementById('do');
 function results() {
     let aResults = document.getElementById('resultA');
     let bResults = document.getElementById('resultB');
+    let question = document.getElementsByClassName('question')[0];
+    let answerBlue = document.getElementById('optionA');
+    let answerRed = document.getElementById('optionB');
 
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', `index.php?action=display`);
 
-    xhr.addEventListener('readystatechange', function() {
+    xhr.addEventListener('readystatechange', function () {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             obj = JSON.parse(xhr.response);
+            print
             let aCount = (obj['a']);
             let bCount = (obj['b']);
+            let q = obj[0];
+            let ansA = obj[1];
+            //console.log(answerBlue.innerHTML);
+            let ansB = obj[2];
+            //console.log(q);
+            //console.log(ansB);
+
 
             aResults.innerHTML = `${aCount}`;
             bResults.innerHTML = `${bCount}`;
+            question.innerText = q;
+            answerBlue.innerText = ansA;
+            answerRed.innerText = obj[2];
 
         } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200 & xhr.status === 0) {
 
@@ -35,6 +49,7 @@ function results() {
     xhr.send(null);
 };
 
-setInterval(function() {
+results();
+setInterval(function () {
     results();
 }, 5000);

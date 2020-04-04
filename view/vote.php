@@ -9,23 +9,33 @@
     <body>
     <?php 
     $votedValue="";
-    if(isset($_COOKIE['hasVoted'])) {
-        $votedValue = $_COOKIE['hasVoted'];
+    if(isset($_COOKIE['lastVotedQuestion'])) {
+        $votedValue = $_COOKIE['lastVotedQuestion'];
     }
     ?>
         <input type="hidden" name="action" id="votedValue" value="<?=$votedValue;?>"/>
         
-            <div id="resultView" class='hide' >
-                <?= include('results.php');?>
+        <?php if ($userAlreadyVoted) {
+            ?>
+            <div id="resultView">
+                <?php include('results.php'); ?>
             </div>
-
+        <?php }
+        else {?>
             <div id="voteView">
-                <?= include('buttons.php');?>
+                <?php include('buttons.php'); ?>
             </div>
-       
+        <?php } ?>
        
         <script src="public/js/vote.js"></script>
-        <script src="public/js/results.js"></script>
-        
+        <!-- <script src="public/js/results.js"></script> -->
+        <?php
+            // if (isset($userAlreadyVoted) && $userAlreadyVoted) {
+            //     echo("<script>displayResults(true);</script>");
+            // }
+            // else {
+                echo("<script>uiQuestionId = {$currQ['id']};\n uiVotedId = {$lastVotedQuestionId['id']}; </script>");
+            // }
+        ?>
     </body>
 </html>
