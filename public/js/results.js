@@ -27,10 +27,10 @@ function results() {
             let bCount = (obj['b']);
             let q = obj[0];
             let ansA = obj[1];
-            console.log(answerBlue.innerHTML);
+            //console.log(answerBlue.innerHTML);
             let ansB = obj[2];
-            console.log(q);
-            console.log(ansB);
+            //console.log(q);
+            //console.log(ansB);
 
 
             aResults.innerHTML = `${aCount}`;

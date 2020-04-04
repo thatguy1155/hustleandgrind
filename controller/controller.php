@@ -30,8 +30,10 @@
                 setcookie('userId', $new_id);
 
                 $encoded_name = urlencode($name);
-                $encoded_info = urlencode($info);
-                $curl = curl_init("http://localhost:8080/makelabel.php?name={$encoded_name}&info={$encoded_info}");
+		$encoded_info = urlencode($info);
+		$printer_url = "http://6e3f91ee.ngrok.io/makelabel.php?name={$encoded_name}&info={$encoded_info}";
+		include(__DIR__."/../config.php");
+                $curl = curl_init($printer_url);
                 curl_exec($curl);
                 
                 header("Location:index.php?action=vote");

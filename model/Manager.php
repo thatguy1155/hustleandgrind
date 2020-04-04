@@ -1,17 +1,17 @@
 <?php
 class Manager {
     protected $_db;
-
-    CONST HOST = "localhost";
-    CONST DBNAME = "hustleandgrind";
-    CONST LOGIN = "root";
-    CONST PWD = "";
     
     // constructor
     function __construct() {
-        $host = self::HOST;
-        $dbname = self::DBNAME;
-        $this->_db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", self::LOGIN, self::PWD);
+        $HOST = "localhost";
+        $DBNAME = "hustleandgrind";
+        $LOGIN = "root";
+        $PWD = "";
+
+	include(__DIR__.'/../config.php');  // Check to see if there are overrides.
+
+        $this->_db = new PDO("mysql:host=$HOST;dbname=$DBNAME;charset=utf8", $LOGIN, $PWD);
     }
   
     public function getUserId($name, $email) {
